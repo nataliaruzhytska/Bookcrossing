@@ -33,7 +33,3 @@ api.add_resource(BookView, "/books", "/books/<book_id>")
 api.add_resource(UserView, "/users", "/users/<user_id>")
 api.add_resource(LibraryView, "/library", "/library/<lib_id>")
 api.add_resource(UserBookView, "/user_books")
-
-
-if __name__ == '__main__':
-    app.run()

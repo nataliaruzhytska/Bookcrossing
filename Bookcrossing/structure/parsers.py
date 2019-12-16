@@ -6,6 +6,8 @@ user_book_parser.add_argument("name", type=str)
 
 book_parser = reqparse.RequestParser()
 book_parser.add_argument("name", type=str)
+book_parser.add_argument("author", type=str)
+book_parser.add_argument("book_id", type=str)
 
 user_parser = reqparse.RequestParser()
 user_parser.add_argument("name", type=str)

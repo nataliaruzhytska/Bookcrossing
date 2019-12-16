@@ -15,6 +15,7 @@ class Config:
 
 class DevConfig(Config):
     TEST_VALUE = "DEV_CONFIG_VALUE"
+    DEBUG = True
 
 
 class TestConfig(Config):
@@ -23,9 +24,8 @@ class TestConfig(Config):
 
 def run_config():
     env = os.environ.get("ENV")
-    if env == "DEV":
-        return DevConfig
-    elif env == "TEST":
-        return TestConfig
-    else:
-        return Config
+    dict_config = {"TEST": TestConfig,
+                   "DEV": DevConfig,
+                   "": Config
+                   }
+    return dict_config.get(env)

@@ -27,6 +27,7 @@ class Book(db.Model):
     year_ed = db.Column(db.Integer)
     translator = db.Column(db.String)
     lib_id = db.Column(db.Integer, db.ForeignKey('library.lib_id'))
+    is_visible = db.Column(db.Boolean)
 
 
 
