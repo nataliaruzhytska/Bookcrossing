@@ -8,6 +8,7 @@ from structure.marshal_structure import books_structure
 from structure.model import Book
 from structure.parsers import book_parser
 
+
 book_bp = Blueprint('BookView', __name__)
 
 
@@ -42,9 +43,8 @@ class BookView(Resource):
         data = json.loads(request.data)
         book = Book.query.get(book_id)
         try:
-            book.name = data["name"]
-            book.author = data["author"]
             book.is_visible = data["is_visible"]
+            book.lib_id = data["lib_id"]
             db.session.commit()
             return book, f"Successfully updated the book {book.name}"
         except (ValueError, KeyError, TypeError) as error:
