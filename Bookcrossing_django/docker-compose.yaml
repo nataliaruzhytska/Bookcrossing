@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+
+    ##### REDIS #####
+    redis:
+        restart: always
+        image: redis:5.0.7
+        volumes:
+            - ./data/redis:/data:rw
+        ports:
+            - 6379:6379
+        healthcheck:
+            test: ["CMD", "redis-cli", "ping"]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+
+    ##### POSTGRES #####
+    db:
+        restart: always
+        build: ./db
+        volumes:
+            - ./data/pgdb:/var/lib/postgresql/data:rw
+        ports:
+            - 5432:5432
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U postgres"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+    ##### APP #####
+    app:
+        restart: on-failure
+        user: "${uid}:${gid}"
+        build: ./app
+        tty: true
+        volumes:
+          - ./app:/usr/src/app:rw
+        ports:
+          - 8000:8000
+        command: "python BC/manage.py runserver 0.0.0.0:8000"
+        depends_on:
+          - db
+

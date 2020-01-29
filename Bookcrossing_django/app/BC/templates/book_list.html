@@ -1,0 +1,19 @@
+{% extends "index.html" %}
+{% block content %}
+    <h1>Books</h1>
+    <ul>
+    {{ book.get_lib_books }}
+        {% for book in object_list %}
+            {% if book.is_visible is True %}
+                <li> <a href="/bookcrossing/books/book_detail/{{ book.id }}/">
+                    {{ book.full_info}} , {{ book.lib.name }}, {{ book.user.fullname }} </a>
+                </li>
+                {% else %}
+                <li>
+                    <span style="color: gray" >{{ book.full_info}} , {{ book.lib.name }}, {{ book.user.fullname }}</span>
+                </li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+
+{% endblock %}

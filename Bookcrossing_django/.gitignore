@@ -1,0 +1,6 @@
+/app/BC/Bookcrossing_django/Bookcrossing/migrations/0004_user_books_to_read.py
+/venv/
+/data/
+/.idea/
+*.pyc
+__pycache__/

@@ -1,0 +1,19 @@
+{% extends "index.html" %}
+{% block content %}
+    <p><h3>Send E-mail</h3>
+    <form method="post">
+            {% csrf_token %}
+        <ul>
+            <label>Enter Your Name: </label>
+            <input type="text" name="subject">
+            <label>Enter Your Message: </label>
+            <input type="text" name="message">
+            <label>From: </label>
+            <input type="email" name="from_email">
+            <input type="password" name="password">
+            <input type="submit" />
+            <input type="reset"/>
+        </ul>
+        </form>
+    </p>
+{% endblock %}

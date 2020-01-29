@@ -1,0 +1,9 @@
+{% extends "index.html" %}
+{% block content %}
+    <p><h3>Book Info: {{ book.short_info }}</h3></p>
+    <p><h3>Owner: {{ book.user.fullname }}</h3></p>
+    <p><a href="send_email/"><h3>Send E-mail</h3></a></p>
+    <a href="hide_books/"><input type="submit" value="hide book"></a>
+    <a href="show_books/"><input type="submit" value="show book"></a>
+    <p><h3>Library: {{ book.lib.name }}</h3></p>
+{% endblock %}

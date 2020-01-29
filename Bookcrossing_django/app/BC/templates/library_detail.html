@@ -1,0 +1,6 @@
+{% extends "index.html" %}
+{% block content %}
+    <p><h3>Library Name: {{ library.name }}</h3></p>
+    <p><h3>Library's Owner: {{ library.user.fullname }}</h3></p>
+    <p><a href="books/"> <h3> Show Books </h3></a></p>
+{% endblock %}
