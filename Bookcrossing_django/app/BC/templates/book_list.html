@@ -6,14 +6,15 @@
         {% for book in object_list %}
             {% if book.is_visible is True %}
                 <li> <a href="/bookcrossing/books/book_detail/{{ book.id }}/">
-                    {{ book.full_info}} , {{ book.lib.name }}, {{ book.user.fullname }} </a>
+                    {{ book.full_info}} , {{ book.lib.name }}, {{ book.user.username }} </a>
                 </li>
                 {% else %}
                 <li>
-                    <span style="color: gray" >{{ book.full_info}} , {{ book.lib.name }}, {{ book.user.fullname }}</span>
+                    <span style="color: gray" >{{ book.full_info}} , {{ book.lib.name }}, {{ book.user.username }}</span>
                 </li>
             {% endif %}
         {% endfor %}
+    <a href="add_book/">Add New</a>
         </ul>
 
 {% endblock %}

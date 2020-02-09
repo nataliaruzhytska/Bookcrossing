@@ -3,12 +3,7 @@
     <p><h3>Add New User</h3>
         <form method="post">
             {% csrf_token %}
-            <label>Enter User First Name</label>
-            <input type="text" name="first_name">
-            <label>Enter User Last Name</label>
-            <input type="text" name="last_name">
-            <label>Enter User e-mail</label>
-            <input type="text" name="email">
+            {{ form.as_p }}
             <input type="submit"/>
             <input type="reset"/>
         </form>

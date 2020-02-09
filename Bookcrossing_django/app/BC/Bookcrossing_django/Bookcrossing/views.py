@@ -1,13 +1,13 @@
-from django.contrib.auth.decorators import permission_required
-from django.contrib.sites import requests
-from django.core.mail import send_mail, BadHeaderError
-from django.http import HttpResponse, request, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.core.mail import send_mail
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.views.generic import FormView, ListView, DetailView, TemplateView
 
 from .forms import UserForm, BookForm, LibraryForm
-from .models import Book, Library, User
+from .models import Book, Library,  WishList
 
 
 def health_check(request):
@@ -143,43 +143,62 @@ class ContactView(TemplateView):
         return render(request, 'thanks.html')
 
 
-@permission_required('Bookcrossing.change_book')
+@login_required
 def hide_books(request, pk):
     book = Book.objects.get(id=pk)
-    book.is_visible = False
-    book.save()
-    return HttpResponse(render(request, 'successful.html', {'book': book, 'action': ' was hidden'}))
-
-
-@permission_required('Bookcrossing.change_book')
-def hide_all_books(request, pk):
-    books = Book.objects.filter(user=pk)
-    for book in books:
+    if request.user == book.user:
         book.is_visible = False
         book.save()
-    return HttpResponse(render(request, 'successful.html', {'book': book, 'action': ' was hidden'}))
+        return HttpResponse(render(request, 'successful.html', {'book': book, 'action': ' was hidden'}))
+    else:
+        return HttpResponse(render(request, "You haven't a permission hide this book"))
 
 
-@permission_required('Bookcrossing.change_book')
+@login_required
+def hide_all_books(request, pk):
+    books = Book.objects.filter(user=pk)
+    if request.user == books.first().user:
+        for book in books:
+            book.is_visible = False
+            book.save()
+        return HttpResponse(render(request, 'successful.html', {'book': book, 'action': ' was hidden'}))
+    else:
+        return HttpResponse(render(request, "You haven't a permission hide this book"))
+
+@login_required
 def show_books(request, pk):
     book = Book.objects.get(id=pk)
-    book.is_visible = True
-    book.save()
-    return HttpResponse(render(request, 'successful.html', {'book': book, 'action': 'is visible'}))
-
-
-@permission_required('Bookcrossing.change_book')
-def show_all_books(request, pk):
-    books = Book.objects.filter(user=pk)
-    for book in books:
+    if request.user == book.user:
         book.is_visible = True
         book.save()
-    return HttpResponse(render(request, 'successful.html', {'book': book, 'action': 'is visible'}))
+        return HttpResponse(render(request, 'successful.html', {'book': book, 'action': 'is visible'}))
+    else:
+        return HttpResponse(render(request, "You haven't a permission show this book"))
 
 
-def add_books_to_read(request,pk):
-    user = User.objects.get(id=request.POST.get('user_id'))
+@login_required
+def show_all_books(request, pk):
+    books = Book.objects.filter(user=pk)
+    if request.user == books.first().user:
+        for book in books:
+            book.is_visible = True
+            book.save()
+        return HttpResponse(render(request, 'successful.html', {'book': book, 'action': 'is visible'}))
+    else:
+        return HttpResponse(render(request, "You haven't a permission show this book"))
+
+
+@login_required
+def add_to_wish_list(request, pk):
     book = Book.objects.get(id=pk)
-    user.books_to_read = book
-    user.save()
-    return HttpResponse(render(request, 'successful.html', {'book': book, 'action': 'was added into list'}))
+    user = User.objects.get(username=request.user)
+    wishlist = WishList(user_id=user.id, book_id=book.id)
+    wishlist.save()
+    return HttpResponse(render(request, 'successful.html', {'book': book, 'action': 'was added into wish list'}))
+
+
+@login_required
+def show_wish_list(request):
+    user = User.objects.get(username=request.user)
+    wishlist = WishList.objects.filter(user=user.id).filter(book__is_visible=True)
+    return HttpResponse(render(request, 'wishlist.html', {'object_list': wishlist}))

@@ -4,11 +4,9 @@
     <ul>
     {% for user in object_list %}
         <li><a href="user_detail/{{ user.id }}/">
-                {{ user.fullname}} , {{ user.email }},
-                {{ user.book}}
+                {{ user.username}} , {{ user.email }}
             </a>
         </li>
     {% endfor %}
     </ul>
-    <a href="add_user/">Add New</a>
 {% endblock %}

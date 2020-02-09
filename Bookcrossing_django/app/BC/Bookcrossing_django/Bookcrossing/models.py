@@ -1,34 +1,5 @@
 from django.db import models
-
-
-class User(models.Model):
-    first_name = models.CharField(
-        'First name',
-        max_length=250,
-    )
-    last_name = models.CharField(
-        'Last name',
-        max_length=250,
-    )
-    email = models.CharField(
-        max_length=250,
-        blank=True,
-        null=True,
-        db_index=True,
-    )
-
-    @property
-    def fullname(self):
-        return f'{self.first_name} {self.last_name}'
-
-    def __str__(self):
-        return self.fullname
-
-    class Meta:
-        ordering = ['first_name', 'last_name']
-        indexes = [
-            models.Index(fields=['first_name', 'last_name']),
-        ]
+from django.contrib.auth.models import User
 
 
 class Library(models.Model):
@@ -37,7 +8,7 @@ class Library(models.Model):
         max_length=250,
     )
 
-    user = models.OneToOneField(
+    user = models.ForeignKey(
         User,
         on_delete=models.CASCADE
     )
@@ -59,7 +30,8 @@ class Book(models.Model):
         null=True,
         blank=True
     )
-    year_ed = models.IntegerField(
+    year_ed = models.CharField(
+        max_length=250,
         null=True,
         blank=True
 
@@ -99,3 +71,17 @@ class Book(models.Model):
         indexes = [
             models.Index(fields=['name', 'author']),
         ]
+
+
+class WishList(models.Model):
+
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE
+    )
+    book = models.ForeignKey(
+        Book, on_delete=models.CASCADE
+    )
+
+    @property
+    def wish_list(self):
+        return f'{self.book.short_info}, {self.book.user.username}'

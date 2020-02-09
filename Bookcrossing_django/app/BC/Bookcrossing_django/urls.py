@@ -22,6 +22,7 @@ urlpatterns = [
     path('bookcrossing/', include('Bookcrossing_django.Bookcrossing.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('<slug:slug>/accounts/', include('django.contrib.auth.urls')),
+    # path('<slug:slug>/sign_in/', name='sign_in'),
 
 
 ]
