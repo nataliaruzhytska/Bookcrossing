@@ -1,1 +1,1 @@
-# My-projects
+# Bookcrossing django-project
