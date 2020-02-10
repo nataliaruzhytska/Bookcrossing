@@ -132,13 +132,13 @@ class ContactView(TemplateView):
     template_name = 'email_form.html'
 
     def post(self, request, *args, **kwargs):
-        book = Book.objects.get(user=self.kwargs.get('pk'))
+        user = User.objects.get(id=self.kwargs.get('pk'))
         subject = request.POST.get('subject')
         message = request.POST.get('message')
         from_email = request.POST.get('from_email')
         password = request.POST.get('password')
         send_mail(subject, message, from_email, auth_user=from_email,  auth_password=password, fail_silently=False,
-                  recipient_list=[book.user.email])
+                  recipient_list=[user.email])
 
         return render(request, 'thanks.html')
 
@@ -151,7 +151,7 @@ def hide_books(request, pk):
         book.save()
         return HttpResponse(render(request, 'successful.html', {'book': book, 'action': ' was hidden'}))
     else:
-        return HttpResponse(render(request, "You haven't a permission hide this book"))
+        return HttpResponse(render(request, 'error.html', {'text': "You haven't a permission hide this books"}))
 
 
 @login_required
@@ -163,7 +163,8 @@ def hide_all_books(request, pk):
             book.save()
         return HttpResponse(render(request, 'successful.html', {'book': book, 'action': ' was hidden'}))
     else:
-        return HttpResponse(render(request, "You haven't a permission hide this book"))
+        return HttpResponse(render(request, 'error.html', {'text': "You haven't a permission hide these books"}))
+
 
 @login_required
 def show_books(request, pk):
@@ -173,7 +174,7 @@ def show_books(request, pk):
         book.save()
         return HttpResponse(render(request, 'successful.html', {'book': book, 'action': 'is visible'}))
     else:
-        return HttpResponse(render(request, "You haven't a permission show this book"))
+        return HttpResponse(render(request, 'error.html', {'text': "You haven't a permission show this book"}))
 
 
 @login_required
@@ -185,14 +186,14 @@ def show_all_books(request, pk):
             book.save()
         return HttpResponse(render(request, 'successful.html', {'book': book, 'action': 'is visible'}))
     else:
-        return HttpResponse(render(request, "You haven't a permission show this book"))
+        return HttpResponse(render(request, 'error.html', {'text': "You haven't a permission show these books"}))
 
 
 @login_required
 def add_to_wish_list(request, pk):
     book = Book.objects.get(id=pk)
     user = User.objects.get(username=request.user)
-    wishlist = WishList(user_id=user.id, book_id=book.id)
+    wishlist = WishList(user=user, book=book)
     wishlist.save()
     return HttpResponse(render(request, 'successful.html', {'book': book, 'action': 'was added into wish list'}))
 

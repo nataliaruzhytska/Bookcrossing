@@ -3,10 +3,10 @@
     <h1>Libraries</h1>
     <ul>
     {% for lib in object_list %}
-        <li><a href="library_detail/{{ lib.id }}/">
+        <li><a href="{% url 'library_detail' lib.id %}">
             {{ lib.name}} , {{ lib.user.username }}</a>
         </li>
     {% endfor %}
     </ul>
-    <a href="add_library/">Add New</a>
+    <a href="{% url 'add_library' %}">Add New</a>
 {% endblock %}

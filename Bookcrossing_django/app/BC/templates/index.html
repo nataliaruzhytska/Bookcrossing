@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta charset="UTF-8">
     <title>{{ title }}</title>
@@ -9,55 +10,55 @@
 <!--Navbar-->
 <nav class="bg-dark navbar navbar-expand-lg navbar-dark primary-color">
 
-  <!-- Navbar brand -->
-  <a class="navbar-brand" href="/bookcrossing">HomePage</a>
+    <!-- Navbar brand -->
+    <a class="navbar-brand" href="{% url 'index' %}">HomePage</a>
 
-  <!-- Collapse button -->
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <!-- Collapse button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+            aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <!-- Collapsible content -->
-  <div class="collapse navbar-collapse" id="basicExampleNav">
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="basicExampleNav">
 
-    <!-- Links -->
-      <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="/bookcrossing/books">All Books</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/bookcrossing/libraries">All Libraries</a>
-      </li>
-        <li class="nav-item">
-        <a class="nav-link" href="/bookcrossing/users">All Users</a>
-      </li>
-          <li class="nav-item">
-        <a class="nav-link" href="/bookcrossing/wish_list">My WishList</a>
-      </li>
-    </ul>
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'book_list' %}">All Books</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'library_list' %}">All Libraries</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'user_list' %}">All Users</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'wish_list' %}">My WishList</a>
+            </li>
+        </ul>
         <a class="nav-link" href="/bookcrossing/accounts/login">LogIn</a>
         <a class="nav-link" href="/bookcrossing/accounts/logout/">LogOut</a>
         <a class="nav-link" href="/bookcrossing/accounts/signin/">SignIn</a>
-      </div>
-      </nav>
-    <!-- Links -->
-    {% block content %}
+    </div>
+</nav>
+<!-- Links -->
+{% block content %}
 
-      <div align="center">
-          <h1 >{{ title }}</h1>
-          <h2> This is my Bookcrossing API</h2>
-      </div>
-    {% endblock %}
+    <div align="center">
+        <h1>{{ title }}</h1>
+        <h2> This is my Bookcrossing API</h2>
+    </div>
+{% endblock %}
 
 <!-- Footer -->
 <footer class="page-footer font-small blue fixed-bottom">
 
-  <!-- Copyright -->
-  <div class="footer-copyright text-center py-3"><p><h5>Bookcrossing Django-project</h5>
-    </p>© 2020 Copyright: Nataliia Ruzhytska
-  </div>
-  <!-- Copyright -->
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3"><p><h5>Bookcrossing Django-project</h5>
+        </p>© 2020 Copyright: Nataliia Ruzhytska
+    </div>
+    <!-- Copyright -->
 
 </footer>
 <!-- Footer -->

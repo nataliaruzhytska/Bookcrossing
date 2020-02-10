@@ -2,5 +2,5 @@
 {% block content %}
     <p><h3>Library Name: {{ library.name }}</h3></p>
     <p><h3>Library's Owner: {{ library.user.username }}</h3></p>
-    <p><a href="books/"> <h3> Show Books </h3></a></p>
+    <p><a href="{% url 'lib_books' library.id %}"> <h3> Show Books </h3></a></p>
 {% endblock %}

@@ -13,7 +13,8 @@ class UserForm(forms.Form):
 
     def save_user(self):
         user = User(username=self.data['username'], first_name=self.data['first_name'], last_name=self.data['last_name'],
-                    email=self.data['email'], password=self.data['password'])
+                    email=self.data['email'])
+        user.set_password(self.data['password'])
         user.save()
 
 

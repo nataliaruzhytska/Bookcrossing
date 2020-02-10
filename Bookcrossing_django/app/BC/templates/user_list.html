@@ -3,7 +3,7 @@
     <h1>Users</h1>
     <ul>
     {% for user in object_list %}
-        <li><a href="user_detail/{{ user.id }}/">
+        <li><a href="{% url 'user_detail' user.id %}">
                 {{ user.username}} , {{ user.email }}
             </a>
         </li>

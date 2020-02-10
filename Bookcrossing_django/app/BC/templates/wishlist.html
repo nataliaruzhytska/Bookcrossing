@@ -4,8 +4,7 @@
     <ul>
     {% for wishlist in object_list %}
         <li>
-                {{ wishlist.book.short_info }}, {{ wishlist.book.user.username }}
-
+            {{ wishlist.book.short_info }}, {{ wishlist.book.user.username }}
         </li>
     {% endfor %}
     </ul>

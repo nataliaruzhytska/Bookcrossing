@@ -5,7 +5,7 @@
     {{ book.get_lib_books }}
         {% for book in object_list %}
             {% if book.is_visible is True %}
-                <li> <a href="/bookcrossing/books/book_detail/{{ book.id }}/">
+                <li> <a href="{% url 'book_detail' book.id %}">
                     {{ book.full_info}} , {{ book.lib.name }}, {{ book.user.username }} </a>
                 </li>
                 {% else %}
@@ -14,7 +14,6 @@
                 </li>
             {% endif %}
         {% endfor %}
-    <a href="add_book/">Add New</a>
+    <a href="{% url 'add_book' user.id %}">Add New</a>
         </ul>
-
 {% endblock %}
