@@ -8,5 +8,5 @@
         </li>
     {% endfor %}
     </ul>
-    <a href="{% url 'add_library' %}">Add New</a>
+    <a href="{% url 'add_library' user.id %}">Add New</a>
 {% endblock %}

@@ -2,24 +2,12 @@ version: '3'
 
 services:
 
-    ##### REDIS #####
-    redis:
-        restart: always
-        image: redis:5.0.7
-        volumes:
-            - ./data/redis:/data:rw
-        ports:
-            - 6379:6379
-        healthcheck:
-            test: ["CMD", "redis-cli", "ping"]
-            interval: 30s
-            timeout: 10s
-            retries: 3
-
     ##### POSTGRES #####
     db:
         restart: always
         build: ./db
+        environment:
+            - POSTGRES_HOST_AUTH_METHOD=trust
         volumes:
             - ./data/pgdb:/var/lib/postgresql/data:rw
         ports:
