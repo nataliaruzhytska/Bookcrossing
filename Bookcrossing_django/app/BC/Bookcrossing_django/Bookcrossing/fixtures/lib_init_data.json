@@ -1,0 +1,26 @@
+[
+  {
+    "model": "Bookcrossing.library",
+    "pk": 4,
+    "fields": {
+      "name": "My library1",
+      "user": 3
+    }
+  },
+  {
+    "model": "Bookcrossing.library",
+    "pk": 5,
+    "fields": {
+      "name": "My library2",
+      "user": 4
+    }
+  },
+  {
+    "model": "Bookcrossing.library",
+    "pk": 6,
+    "fields": {
+      "name": "My library3",
+      "user": 4
+    }
+  }
+  ]

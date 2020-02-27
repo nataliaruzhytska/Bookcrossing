@@ -139,3 +139,5 @@ STATIC_URL = '/static/'
 LOGOUT_REDIRECT_URL = '/bookcrossing/'
 
 LOGIN_REDIRECT_URL = '/bookcrossing/'
+
+FIXTURES = ['books_init_data.json', 'lib_init_data.json', 'users_init_data.json', 'wishlist_init_data.json']

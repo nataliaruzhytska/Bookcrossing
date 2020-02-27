@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Book, Library
+from .models import Book, Library, WishList
 
 
 @admin.register(Library)
@@ -15,3 +15,10 @@ class BookAdmin(admin.ModelAdmin):
                     'user_id', 'is_visible')
     search_fields = ('name', 'author')
     list_filter = ('name', 'author', 'is_visible')
+
+
+@admin.register(WishList)
+class BookAdmin(admin.ModelAdmin):
+    list_display = ('user', 'book')
+    search_fields = ('user', 'book')
+    list_filter = ('user', 'book')
