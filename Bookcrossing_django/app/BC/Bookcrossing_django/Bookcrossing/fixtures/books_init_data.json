@@ -1,0 +1,44 @@
+[
+  {
+    "model": "Bookcrossing.book",
+    "pk": 2,
+    "fields": {
+      "name": "book_001",
+      "author": "author_001",
+      "edition": "1st",
+      "year_ed": "2000",
+      "translator": "-",
+      "lib": 4,
+      "user": 3,
+      "is_visible": true
+    }
+  },
+  {
+    "model": "Bookcrossing.book",
+    "pk": 3,
+    "fields": {
+      "name": "book_002",
+      "author": "author_002",
+      "edition": "2nd",
+      "year_ed": "2010",
+      "translator": "Translator1",
+      "lib": 5,
+      "user": 4,
+      "is_visible": true
+    }
+  },
+  {
+    "model": "Bookcrossing.book",
+    "pk": 4,
+    "fields": {
+      "name": "book_003",
+      "author": "author_003",
+      "edition": "3rd",
+      "year_ed": "2020",
+      "translator": "Translator2",
+      "lib": 6,
+      "user": 4,
+      "is_visible": true
+    }
+  }
+]

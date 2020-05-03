@@ -1,0 +1,11 @@
+{% extends "index.html" %}
+{% block content %}
+    <p><h3>Add New Library</h3>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_table}}
+            <input type="submit"/>
+            <input type="reset"/>
+        </form>
+    </p>
+{% endblock %}

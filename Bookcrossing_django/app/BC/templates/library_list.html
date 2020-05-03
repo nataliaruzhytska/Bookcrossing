@@ -1,0 +1,12 @@
+{% extends "index.html" %}
+{% block content %}
+    <h1>Libraries</h1>
+    <ul>
+    {% for lib in object_list %}
+        <li><a href="{% url 'library_detail' lib.id %}">
+            {{ lib.name}} , {{ lib.user.username }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+    <a href="{% url 'add_library' user.id %}">Add New</a>
+{% endblock %}

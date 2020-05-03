@@ -1,0 +1,7 @@
+{% extends "index.html" %}
+{% block content %}
+    <div align="center">
+        <h1>Book {{ book.short_info }}  {{ action}}</h1>
+        <p><a href="{% url 'index' %}">Return to Home Page</a></p>
+    </div>
+{% endblock %}

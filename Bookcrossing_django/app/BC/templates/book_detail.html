@@ -1,0 +1,10 @@
+{% extends "index.html" %}
+{% block content %}
+    <p><h3>Book Info: {{ book.short_info }}</h3></p>
+    <p><h3>Owner: {{ book.user.username }}</h3></p>
+    <p><a href="{% url 'send_email' book.user.id %}"><h3>Send E-mail</h3></a></p>
+    <a href="{% url 'hide_books' book.id %}"><input type="submit" value="hide book"></a>
+    <a href="{% url 'show_books' book.id %}"><input type="submit" value="show book"></a>
+    <p><h3>Library: {{ book.lib.name }}</h3></p>
+    <a href="{% url 'add_to_wish_list' book.id %}"><input type="submit" value="add to wish list"></a>
+{% endblock %}
